@@ -38,7 +38,7 @@ typedef struct s_phil
 typedef struct	s_data
 {
 	t_phil	phil[200];
-	t_argv	*input;
+	t_argv	input;
 	pthread_mutex_t write;
 	pthread_mutex_t forks[200];
 	long	time0;
