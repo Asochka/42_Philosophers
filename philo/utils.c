@@ -56,6 +56,12 @@ void	ft_free_data(t_data *data, char *s)
 	if (s)
 		printf("%s\n", s);
 }
+
+int	ft_print_error(char *s)
+{
+	printf("%s\n", s);
+	return (1);
+}
 // void	*ft_memset(void *buf, int c, size_t count)
 // {
 // 	size_t			i;

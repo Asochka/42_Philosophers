@@ -14,6 +14,8 @@
 // pthread_mutex_destroy, pthread_mutex_lock,
 // pthread_mutex_unlock
 
+struct	s_data;
+
 typedef struct	s_argv
 {
 	int	number; //number_of_philosophers
@@ -31,12 +33,10 @@ typedef struct s_phil
 	int	right;//or t_mutex *min and t_mutex *max
 	int	left;
 	pthread_t	thr_id;
-	int	time_to_eat;//num_of_times_ate
-	long long	update_time;//time_to_die
-	//struct timeval last_time_eat для gettimeofday(struct timeval *, 0)
-	//-long tv_sec
-	//-long tv_usec
-	// tv_sec * 1000 +tv_usec/1000 типо текущее время
+	int	num_of_times_ate;//num_of_times_ate
+	long long	update_time;//time_to_die//time last meal
+	struct s_data	*datas;
+
 } t_phil;
 
 typedef struct	s_data
