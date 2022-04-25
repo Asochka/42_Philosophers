@@ -28,11 +28,15 @@ typedef struct	s_argv
 typedef struct s_phil
 {
 	int	id;
-	int	right;
+	int	right;//or t_mutex *min and t_mutex *max
 	int	left;
 	pthread_t	thr_id;
 	int	time_to_eat;//num_of_times_ate
 	long long	update_time;//time_to_die
+	//struct timeval last_time_eat для gettimeofday(struct timeval *, 0)
+	//-long tv_sec
+	//-long tv_usec
+	// tv_sec * 1000 +tv_usec/1000 типо текущее время
 } t_phil;
 
 typedef struct	s_data

@@ -1,22 +1,50 @@
 #include "philo.h"
 
-// void	*ft_phil(t_data *data)
-// {
-// 	printf("Hello\n");
-// 	return (0);
-// }
+void	*ft_phil(t_data *data)//функция имитирующая работу философа
+{
+	// можно добавить задержку для четных философов! if i%2 == 0 (четный) usleep(2500)
+	while (1)
+	{
+		//переменная dead == 1 то значит всех надо убить 
+		//все принтф защитить мьютексом
+		lock(min_fork);
+		printf("philo X take a fork ");
+		lock(max_fork);
+		printf("philo X take a fork ");
+		printf("philo X eat ");
+		usleep(time_to_eat);
+				//обновить время последней еды
+		unlock();
+		unlock();
+
+		printf("philo X sleep ");
+		usleep(ime_to_sleep);
+		printf("philo X think ");
+	}
+}
+
+void	ft_philo_is_dead(t_data *data)
+{
+//получаем текущее время и смотрим на время последнего обеда фило получаем разницу и переводим в млсек и если оно больше чем time_to_die
+//dead = 1 (чтобы всех потом убить)
+}
 
 int	ft_start_threads(t_data *data)
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
-	// while (i < data->number)
-	// {
-	// 	pthread_create(&(data->trds_id[i]), NULL, ft_phil(), data);
-	// 	i++;
-	// 	pthread_join(&(data->trds_id[i]));
+	i = 0;
+	while (i < data->input.number)
+	{
+		pthread_create(&(data->phil[i].id), NULL, ft_phil(), data);
+		i++;
+		pthread_join(&(data->trds_id[i]));// в самом конце
 	}
+	// while (1)
+	// {
+	// 	while (ft_phil_is_dead(data) == 0)
+	// освободить память и заджойнить потоки и дестрой мьютекс(?)
+	// }
 }
 
 int	ft_init(int argc, char **argv, t_data *data)
@@ -24,9 +52,9 @@ int	ft_init(int argc, char **argv, t_data *data)
 	data->input.number = ft_atoi(argv[1]);
 	if (data->input.number > 200 || data->input.number < 1)
 		return (1);
-	data->input.die = ft_atoi(argv[2]);
-	data->input.eat = ft_atoi(argv[3]);
-	data->input.sleep = ft_atoi(argv[4]);
+	data->input.die = ft_atoi(argv[2]) * 1000;
+	data->input.eat = ft_atoi(argv[3]) * 1000;
+	data->input.sleep = ft_atoi(argv[4]) * 1000;
 	if (argc == 6)
 		data->input.number_eat = ft_atoi(argv[5]);
 	return (0);
