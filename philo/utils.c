@@ -62,6 +62,35 @@ int	ft_print_error(char *s)
 	printf("%s\n", s);
 	return (1);
 }
+
+long long	ft_timestamp(void)
+{
+	struct timeval	tm;
+
+	gettimeofday(&tm, NULL);
+	return ((tm.tv_sec * 1000) + (tm.tv_usec / 1000));
+}
+
+void	ft_print_output(t_data *data, char *str, t_phil *phil)
+{
+	if (!data->dead)
+	{
+		pthread_mutex_lock(&(data->write));
+		printf("%lli ", timestamp() - data->time0);
+		printf("%i ", phil->id + 1);
+		printf("%s\n", str);
+		pthread_mutex_unlock(&(data->write));
+	}
+}
+
+void	ft_usleep(long long time)
+{
+	long long i;
+
+	i = ft_timestamp();
+	while (ft_timestamp() - i < time)
+		usleep(time / 10);
+}
 // void	*ft_memset(void *buf, int c, size_t count)
 // {
 // 	size_t			i;

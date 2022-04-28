@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 HEAD_FILE = philo/philo.h
 
-SRCS =	philo/main.c
+SRCS =	philo/main.c philo/inits.c philo/philo_algo.c philo/utils.c
 
 OBJS = $(SRCS:.c=.o)
 
